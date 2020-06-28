@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "roles-and-abilities": {
+      "hosting": {
+        "TP-buena-sonrisa": [
+          "roles-and-abilities"
+        ]
+      }
+    }
+  }
+}

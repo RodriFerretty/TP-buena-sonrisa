@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -117,8 +118,16 @@
               "devServerTarget": "TP-buena-sonrisa:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
-  "defaultProject": "TP-buena-sonrisa"
+    }
+  },
+  "defaultProject": "TP-buena-sonrisa",
+  "cli": {
+    "analytics": false
+  }
 }
