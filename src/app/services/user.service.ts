@@ -49,6 +49,7 @@ export class UserService {
   }
 
   private addNewUserData(newUser: User, user: firebase.auth.UserCredential) {
+    console.log("En addNewUserData")
     newUser.uid = user.user.uid
     user.user.updateProfile({
       displayName: newUser.displayName
@@ -68,8 +69,10 @@ export class UserService {
   */
   
   public adminCreateUserAccount(newUser: User, password: string): Promise<void> {
-    return this.authService.signUp(newUser.email, password).then(createdUser => {
+    return this.authService.adminCreateUserAccount(newUser.email, password).then(createdUser => {
+      console.log("En adminCreateUserAccount UserService:", createdUser)
       this.addNewUserData(newUser, createdUser)
+      console.log("En adminCreateUserAccount")
       this.authService.logoutCreatedUserAccount()
     }
     )

@@ -38,7 +38,8 @@ export class AuthService {
    Admin account creation.
   */
   public adminCreateUserAccount(email: string, password: string): Promise<firebase.auth.UserCredential> {
-    return this.afAuth2.auth().signInWithEmailAndPassword(email, password)
+    console.log("En adminCreateUserAccount: ", email, password)
+    return this.afAuth2.auth().createUserWithEmailAndPassword(email, password)
   }
 
   public logoutCreatedUserAccount() {
