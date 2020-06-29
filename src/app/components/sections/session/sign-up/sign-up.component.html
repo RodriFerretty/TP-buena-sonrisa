@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-11">
+            <h3 class="row justify-content-center">Registrarse</h3>
+            <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="email">Email de usuario</label>
+                    <input type="text" formControlName="email" class="form-control" />
+                    <small *ngIf="model.email.errors?.required">El email es requerido</small>
+                    <small *ngIf="model.email.invalid && !model.email.errors?.required">El email es inválido</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Nombre de usuario</label>
+                    <input type="text" formControlName="username" class="form-control" />
+                    <small *ngIf="model.username.errors?.required">El username es requerido</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" formControlName="password" class="form-control" />
+                    <small *ngIf="model.password.errors?.required">La contraseña es requerida</small>
+                    <small *ngIf="model.password.invalid && !model.password.errors?.required">Minimo 6
+                        caracteres</small>
+                </div>
+                <div class="row justify-content-center">
+                    <button type="submit" class="btn btn-success" [disabled]="!signUpForm.valid">Registrar
+                        usuario</button>
+                </div>
+                <br>
+            </form>
+        </div>
+    </div>
+</div>

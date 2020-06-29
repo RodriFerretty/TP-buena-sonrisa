@@ -1,0 +1,7 @@
+.bordered-content {
+    display: block;
+    border: solid;
+    border-width: 1px;
+    border-color: #fff #dee2e6 #dee2e6;
+    padding: 15px;
+}
