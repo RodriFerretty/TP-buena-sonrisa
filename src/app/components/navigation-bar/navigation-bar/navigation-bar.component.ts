@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public userService: UserService) { }
 
   ngOnInit(): void {
+  }
+
+  public isLoggedIn(): boolean {
+    console.log("---- En isLoggedIn(): ", this.userService.getCurrentUser())
+    return (this.userService.getCurrentUser() != null)
+  }
+
+  public getDisplayName(): string {
+    return this.userService.getCurrentUser().displayName
   }
 
 }

@@ -17,7 +17,7 @@ import { HomeComponent } from './components/sections/home/home.component';
 import { SessionComponent } from './components/sections/session/session.component';
 import { LoginComponent } from './components/sections/session/login/login.component';
 import { SignUpComponent } from './components/sections/session/sign-up/sign-up.component';
-import { CreateAccountComponent } from './components/sections/session/create-account/create-account.component';
+import { CreateAccountComponent } from './components/sections/create-account/create-account.component';
 
 @NgModule({
   declarations: [

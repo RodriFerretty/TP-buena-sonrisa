@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SessionComponent } from './components/sections/session/session.component';
 import { HomeComponent } from './components/sections/home/home.component';
+import { CreateAccountComponent } from './components/sections/create-account/create-account.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'session',
     component: SessionComponent
+  },
+  {
+    path: 'createAccount',
+    component: CreateAccountComponent
   }
   ];
 

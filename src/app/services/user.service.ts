@@ -39,7 +39,6 @@ export class UserService {
   public signUpAsUser(newUser: User, password: string): Promise<void> {
     return this.authService.signUp(newUser.email, password).then(createdUser => {
       this.addNewUserData(newUser, createdUser)
-      this.authService.logout()
     }
     )
   }

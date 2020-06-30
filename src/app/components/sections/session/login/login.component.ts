@@ -44,9 +44,9 @@ export class LoginComponent implements OnInit {
   onSignIn() {
     this.spinner.show()
     this.userService.loginAsUser(this.model.email.value, this.model.password.value).then((result) => {
-      // console.log("Result en el login component: ", result)
-      this.spinner.hide()
       this.router.navigate(['home'])
+    }).finally(() => {
+      this.spinner.hide()
     }).catch((error) => {
       window.alert(error.message)
     })

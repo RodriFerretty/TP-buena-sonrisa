@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-session',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SessionComponent implements OnInit {
 
-  constructor() { }
+  constructor(public userService: UserService) { }
 
   ngOnInit(): void {
   }
-
+ 
+  public isLoggedInAndAdmin(): boolean {
+    if ((this.userService.getCurrentUser() != null)) {
+      return this.userService.getCurrentUser().role == 'admin'
+    } 
+    return false
+  }
 }
