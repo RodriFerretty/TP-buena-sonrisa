@@ -71,6 +71,7 @@ export class UserService {
     /**
      * TODO: Add profile picture upload to Firebase Cloud Storage
      * https://www.youtube.com/watch?v=wRWZQwiNFnM
+     * https://indepth.dev/implement-file-upload-with-firebase-storage/
      */
     if (picture) {
       const path = `profilePictures/${new Date().getTime()}_${picture.name}`
