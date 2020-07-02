@@ -18,6 +18,8 @@ import { SessionComponent } from './components/sections/session/session.componen
 import { LoginComponent } from './components/sections/session/login/login.component';
 import { SignUpComponent } from './components/sections/session/sign-up/sign-up.component';
 import { CreateAccountComponent } from './components/sections/create-account/create-account.component';
+import { AppointmentsHomeComponent } from './components/sections/appointments/appointments-home/appointments-home.component';
+import { AppointmentDetailComponent } from './components/sections/appointments/appointment-detail/appointment-detail.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { CreateAccountComponent } from './components/sections/create-account/cre
     SessionComponent,
     LoginComponent,
     SignUpComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    AppointmentsHomeComponent,
+    AppointmentDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -3,12 +3,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { SessionComponent } from './components/sections/session/session.component';
 import { HomeComponent } from './components/sections/home/home.component';
 import { CreateAccountComponent } from './components/sections/create-account/create-account.component';
+import { AppointmentsHomeComponent } from './components/sections/appointments/appointments-home/appointments-home.component';
+import { redirectUnauthorizedTo, redirectLoggedInTo, AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['session']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
   {
     path: 'home',
-    component: HomeComponent
+    component: AppointmentsHomeComponent,
+    canActivate: [AngularFireAuthGuard], 
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: 'session',
@@ -16,7 +22,9 @@ const routes: Routes = [
   },
   {
     path: 'createAccount',
-    component: CreateAccountComponent
+    component: CreateAccountComponent,
+    canActivate: [AngularFireAuthGuard], 
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   }
   ];
 

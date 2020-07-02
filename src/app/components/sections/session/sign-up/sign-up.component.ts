@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
+  public selectedPicture: File = null
 
   constructor(private userService: UserService, 
     private spinner: NgxSpinnerService,
@@ -34,8 +35,15 @@ export class SignUpComponent implements OnInit {
     return new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      picture: new FormControl('', [Validators.required]),
     });
+  }
+
+  onPictureSelected(event) {
+    console.log(event);
+    this.selectedPicture = <File>event.target.files[0]
+    this.signUpForm.controls['picture'].setValue(this.selectedPicture ? this.selectedPicture.name : ''); // <-- Set Value for Validation
   }
 
   onSignUp() {
@@ -43,12 +51,16 @@ export class SignUpComponent implements OnInit {
     const newUser = new User()
     newUser.email = this.model.email.value
     newUser.displayName = this.model.username.value
-    this.userService.signUpAsUser(newUser, this.model.password.value).then((result) => {
+    newUser.role = "client"
+    this.userService.signUpAsUser(newUser, this.model.password.value, this.selectedPicture).then((result) => {
       this.spinner.hide()
+      // this.userService.logoutAsUser()
       this.router.navigate(['home'])
     }).catch((error) => {
       window.alert(error.message)
     })
   }
+
+
 
 }

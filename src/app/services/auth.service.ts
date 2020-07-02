@@ -27,7 +27,8 @@ export class AuthService {
   }
 
   public signUp(email: string, password: string): Promise<firebase.auth.UserCredential> {
-    return this.afAuth.createUserWithEmailAndPassword(email, password)
+    // return this.afAuth.createUserWithEmailAndPassword(email, password)
+    return this.afAuth2.auth().createUserWithEmailAndPassword(email, password)
   }
 
   public getCurrentUser(): Observable<firebase.User> {

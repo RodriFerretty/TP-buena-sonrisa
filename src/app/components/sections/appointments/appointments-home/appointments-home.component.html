@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <h3>Turnos</h3>
+    </div>
+    <div class="row">
+        <!-- <div class="col m-2">
+            <input type="text" (input)="onSearchChange($event.target.value)" placeholder="Buscar..." />
+        </div> -->
+        <!-- <div class="col-4 m-2">
+            <button class="btn btn-danger btn-block" (click)="downloadPDF()">Descargar PDF</button>
+        </div> -->
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Especialista</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora</th>
+                    <th scope="col">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let appointment of filteredAppointments" (click)="onSelect(appointment)"
+                    class="row-clickable"
+                    data-toggle="modal" data-target="#exampleModal">
+                    <td>{{ appointment.client | titlecase}}</td>
+                    <td>{{ appointment.specialist | titlecase}}</td>
+                    <td>{{ appointment.date | titlecase}}</td>
+                    <td>{{ appointment.time | titlecase}}</td>
+                    <td>{{ appointment.status | titlecase}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Open modal
+        </button>
+        <app-appointment-detail></app-appointment-detail>
+    </div>
+</div>
