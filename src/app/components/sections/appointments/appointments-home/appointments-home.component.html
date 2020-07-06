@@ -38,6 +38,10 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
             Open modal
         </button>
-        <app-appointment-detail></app-appointment-detail>
+        <app-appointment-detail 
+        [allAppointments]="filteredAppointments" 
+        [allUsers]="allUsers"
+        [allSpecialities]="allSpecialities"
+        [role]="'asdasdasda'"></app-appointment-detail>
     </div>
 </div>
