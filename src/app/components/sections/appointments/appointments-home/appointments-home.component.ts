@@ -5,6 +5,9 @@ import { AppointmentsService } from 'src/app/services/appointments.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { User } from 'src/app/entities/user';
+import { SpecialititesService } from 'src/app/services/specialitites.service';
+import { Speciality } from 'src/app/entities/speciality';
 
 @Component({
   selector: 'app-appointments-home',
@@ -16,28 +19,26 @@ export class AppointmentsHomeComponent implements OnInit {
   public currentUserRole: string
   public allAppointments: Appointment[]
   public filteredAppointments: Appointment[]
-  
-  public textText = "pepe"
+  public allUsers: User[]
+  public allSpecialities: Speciality[]
 
+  public textText = "pepe"
   @ViewChild('content') content: any;
+
   
   constructor(private userService: UserService, 
     private appointmentsService: AppointmentsService,
+    private specialitiesService: SpecialititesService,
     private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.getAllAppointments()
     this.getAllUsers()
+    this.getAllSpecialities()
   }
 
   onSelect(appointment: Appointment): void {
     this.textText = appointment.date
-    //Open modal with Appointment
-      // if(!true){
-
-      // } else {
-      //    this.content.open();
-      // }
   }
 
 
@@ -60,7 +61,17 @@ export class AppointmentsHomeComponent implements OnInit {
     console.log("en getAllUsers")
     this.userService.getAll().pipe(
       takeUntil(this.destroy$)).subscribe(users => {
-      console.log(users);
+      console.log("All users on home:", users);
+      this.allUsers = users
+    });
+  }
+
+  getAllSpecialities() {
+    console.log("en getAllSpecialities")
+    this.specialitiesService.getAll().pipe(
+      takeUntil(this.destroy$)).subscribe(specialities => {
+      console.log("All specialities on home:", specialities);
+      this.allSpecialities = specialities
     });
   }
 
