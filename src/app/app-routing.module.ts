@@ -25,7 +25,17 @@ const routes: Routes = [
     component: CreateAccountComponent,
     canActivate: [AngularFireAuthGuard], 
     data: { authGuardPipe: redirectUnauthorizedToLogin }
-  }
+  },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+},
+{
+    path: '**',
+    redirectTo: '/home',
+    pathMatch: 'full'
+}
   ];
 
 @NgModule({
