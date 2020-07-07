@@ -2,13 +2,26 @@
     <div class="row justify-content-center">
         <h3>Turnos</h3>
     </div>
-    <div class="row">
-        <!-- <div class="col m-2">
+    <!-- <div class="row"> -->
+    <!-- <div class="col m-2">
             <input type="text" (input)="onSearchChange($event.target.value)" placeholder="Buscar..." />
         </div> -->
-        <!-- <div class="col-4 m-2">
+    <!-- <div class="col-4 m-2">
             <button class="btn btn-danger btn-block" (click)="downloadPDF()">Descargar PDF</button>
         </div> -->
+    <!-- </div> -->
+    <div class="row mb-2">
+        <div class="col-sm">
+            <button type="button" class="btn btn-success" 
+                    data-toggle="modal" data-target="#newAppointmentModal" (click)="newAppointment()">
+                    Nuevo turno</button>
+        </div>
+        <div class="col-sm">
+            <!-- Otro botón (descargar PDF quizá) -->
+        </div>
+        <div class="col-sm">
+            <!-- Otro botón (Descargar CSV quizá) -->
+        </div>
     </div>
     <div class="row">
         <table class="table">
@@ -23,8 +36,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let appointment of filteredAppointments" (click)="onSelect(appointment)"
-                    class="row-clickable"
-                    data-toggle="modal" data-target="#exampleModal">
+                    class="row-clickable" data-toggle="modal" data-target="#detailAppointmentModal">
                     <td>{{ appointment.client | titlecase}}</td>
                     <td>{{ appointment.specialist | titlecase}}</td>
                     <td>{{ appointment.date | titlecase}}</td>
@@ -34,14 +46,19 @@
             </tbody>
         </table>
     </div>
+
     <div class="container">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-            Open modal
-        </button>
-        <app-appointment-detail 
-        [allAppointments]="filteredAppointments" 
-        [allUsers]="allUsers"
-        [allSpecialities]="allSpecialities"
-        [role]="'asdasdasda'"></app-appointment-detail>
+        <div class="modal fade" id="detailAppointmentModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <app-appointment-detail [selectedAppointment]="selectedAppointment" [role]="'asdasdasda'"></app-appointment-detail>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="modal fade" id="newAppointmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <app-appointment-new [allAppointments]="filteredAppointments" [allUsers]="allUsers"
+                [allSpecialities]="allSpecialities" [role]="'asdasdasda'"></app-appointment-new>
+        </div>
     </div>
 </div>

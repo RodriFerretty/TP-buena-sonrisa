@@ -22,6 +22,8 @@ export class AppointmentsHomeComponent implements OnInit {
   public allUsers: User[]
   public allSpecialities: Speciality[]
 
+  public selectedAppointment: Appointment
+
   public textText = "pepe"
   @ViewChild('content') content: any;
 
@@ -38,7 +40,7 @@ export class AppointmentsHomeComponent implements OnInit {
   }
 
   onSelect(appointment: Appointment): void {
-    this.textText = appointment.date
+    this.selectedAppointment = appointment
   }
 
 
@@ -80,4 +82,9 @@ export class AppointmentsHomeComponent implements OnInit {
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();
   }
+
+  newAppointment(){
+    //Limpiar el appointment seleccionado para que se muestre limpio el form
+
+  } 
 }

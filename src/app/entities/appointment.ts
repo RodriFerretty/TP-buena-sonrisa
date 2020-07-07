@@ -1,11 +1,11 @@
 export class Appointment {
     public uid: string;
     public client: string;
-    public specialist: string;
-    public date: any;
-    public time: number;
-    public status: string;
-    public clientReview?: string;
-    public specialistReview?: number;
+    public specialist: string; //specialist uid
+    public date: string; //date as string ? 
+    public time: string; //time as string ?
+    public status: string; //active, cancelled, attended
+    public clientReview?: string; 
+    public specialistReview?: string;
     public attended: boolean
 }

@@ -1,0 +1,61 @@
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true"> -->
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Turno</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="newAppointmentForm" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Fecha</label>
+            <!-- <input type="text" class="form-control" readonly /> -->
+            <div class="input-group">
+              <input class="form-control" formControlName="date" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
+                (dateSelect)="onDateSelected($event)" #d="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="speciality">Especialidad</label>
+            <select class="form-control" formControlName="speciality" id="exampleFormControlSelect1"
+              (change)=onSpecialitySelected()>
+              <option value="" disabled selected hidden>Elegir especialidad</option>
+              <option *ngFor="let speciality of allSpecialities" [ngValue]="speciality">{{speciality.name}}</option>
+            </select>
+            <!-- <small *ngIf="model.role.errors?.required">El rol es requerido</small> -->
+          </div>
+  
+          <div class="form-group">
+            <label for="specialist">Especialista</label>
+            <select class="form-control" formControlName="specialist" id="exampleFormControlSelect1"
+              (change)=onSpecialistSelected()>
+              <option value="" disabled selected hidden>Especialista</option>
+              <option *ngFor="let specialist of filteredSpecialists" [ngValue]="specialist">{{specialist.displayName}}
+              </option>
+            </select>
+          </div>
+  
+          <div class="form-group">
+            <label for="schedule">Horario</label>
+            <select class="form-control" formControlName="schedule" id="exampleFormControlSelect1">
+              <option value="" disabled selected hidden>Horario</option>
+              <option *ngFor="let schedule of filteredSchedules">{{schedule}}</option>
+            </select>
+          </div>
+          <br>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="!newAppointmentForm.valid"
+            (click)="logValues()">Guardar turno</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- </div> -->
