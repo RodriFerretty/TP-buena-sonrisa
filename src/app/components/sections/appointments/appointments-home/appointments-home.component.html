@@ -25,7 +25,10 @@
         </div>
     </div>
     <div class="row">
-        <table class="table">
+        <div *ngIf="!getValuesForTable()?.length && userService.getCurrentUser()" class="col text-center">
+            <h5 class="text-danger justify-content-center d-block">No hay turnos para el usuario</h5>
+        </div>
+        <table *ngIf="getValuesForTable()?.length > 0" class="table">
             <thead>
                 <tr>
                     <th *ngIf="userService.getCurrentUser()?.role == 'specialist'"  scope="col">Cliente</th>
