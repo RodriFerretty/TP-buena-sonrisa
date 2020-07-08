@@ -91,6 +91,19 @@ export class AppointmentsHomeComponent implements OnInit {
   /*
   * Methods to get names and values for table.
   */
+
+  getValuesForTable() {
+    if (this.userService.getCurrentUser()?.role == 'client') {
+      return this.filteredAppointments?.filter(appoint => 
+        appoint.client == this.userService.getCurrentUser()?.uid
+        )
+    } else if (this.userService.getCurrentUser()?.role == 'specialist') {
+      return this.filteredAppointments?.filter(appoint => 
+        appoint.specialist == this.userService.getCurrentUser()?.uid
+        )
+    }
+  }
+
   getClientNameForUid(uid: string){
     const user = this.allUsers?.find(x => x.uid == uid)
     return user?.displayName

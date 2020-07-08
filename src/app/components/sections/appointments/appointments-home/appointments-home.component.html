@@ -36,7 +36,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let appointment of filteredAppointments" (click)="onSelect(appointment)"
+                <tr *ngFor="let appointment of getValuesForTable()" (click)="onSelect(appointment)"
                     class="row-clickable">
                      <!-- data-toggle="modal" data-target="#detailAppointmentModal"> -->
                     <td>{{ getClientNameForUid(appointment.client) | titlecase}}</td>
