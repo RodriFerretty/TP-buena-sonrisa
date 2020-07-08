@@ -12,12 +12,13 @@
     <!-- </div> -->
     <div class="row mb-2">
         <div class="col-sm">
-            <button type="button" class="btn btn-success" 
-                    data-toggle="modal" data-target="#newAppointmentModal" (click)="newAppointment()">
+            <button *ngIf="userService.getCurrentUser()?.role == 'client'" type="button" class="btn btn-success" 
+                    data-toggle="modal" data-target="#newAppointmentModal">
                     Nuevo turno</button>
         </div>
         <div class="col-sm">
-            <!-- Otro botón (descargar PDF quizá) -->
+            <button *ngIf="userService.getCurrentUser()?.role == 'specialist'" 
+                    type="button" class="btn btn-danger">[PDF]</button>
         </div>
         <div class="col-sm">
             <!-- Otro botón (Descargar CSV quizá) -->
@@ -36,7 +37,8 @@
             </thead>
             <tbody>
                 <tr *ngFor="let appointment of filteredAppointments" (click)="onSelect(appointment)"
-                    class="row-clickable" data-toggle="modal" data-target="#detailAppointmentModal">
+                    class="row-clickable">
+                     <!-- data-toggle="modal" data-target="#detailAppointmentModal"> -->
                     <td>{{ appointment.client | titlecase}}</td>
                     <td>{{ appointment.specialist | titlecase}}</td>
                     <td>{{ appointment.date | titlecase}}</td>
@@ -55,10 +57,14 @@
     </div>
 
     <div class="container">
-        <div class="modal fade" id="newAppointmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <app-appointment-new [allAppointments]="filteredAppointments" [allUsers]="allUsers"
-                [allSpecialities]="allSpecialities" [role]="'asdasdasda'"></app-appointment-new>
+        <div class="modal fade" id="newAppointmentModal" 
+             tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             data-backdrop="static" data-keyboard="false" aria-hidden="true">
+            <app-appointment-new [allAppointments]="filteredAppointments" 
+                                 [allUsers]="allUsers"
+                                 [allSpecialities]="allSpecialities" 
+                                 [role]="'asdasdasda'"
+                                 (saveAppointment)=saveNewAppointment($event)></app-appointment-new>
         </div>
     </div>
 </div>

@@ -10,7 +10,7 @@ import { switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
-  private currentUser: User;
+  public currentUser: User;
 
   constructor(private authService: AuthService,
     private afStore: AngularFirestore,

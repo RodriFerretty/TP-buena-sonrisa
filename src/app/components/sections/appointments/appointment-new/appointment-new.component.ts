@@ -68,9 +68,30 @@ export class AppointmentNewComponent implements OnInit {
     console.warn("NEW: LogValues() -> Form value: ", this.newAppointmentForm.value)
   }
 
+  cancelNew(){
+    this.newAppointmentForm.reset()
+  }
+
   onSubmit() {
     this.logValues()
+    this.emitNewAppointment()
   }
+
+  private emitNewAppointment() {
+    var newApp = new Appointment()
+    newApp.specialist = this.newAppointmentForm.value.specialist.uid
+    const jsDate = new Date(this.newAppointmentForm.value.date.year, 
+                            this.newAppointmentForm.value.date.month - 1, 
+                            this.newAppointmentForm.value.date.day);
+    console.log("Date en JS: ", jsDate)
+    newApp.date = "010920"
+    newApp.time = this.newAppointmentForm.value.schedule
+    console.log("En emitNewAppointment - newApp: ", newApp)
+    this.saveAppointment.emit(newApp)
+    
+  }
+
+
 
   /* Input events */
   onDateSelected(event: any) { 

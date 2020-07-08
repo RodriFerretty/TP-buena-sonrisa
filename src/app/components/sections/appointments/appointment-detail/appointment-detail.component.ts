@@ -36,16 +36,16 @@ export class AppointmentDetailComponent implements OnInit {
   //   });
   // }
 
-  get formModel() {
-    // return this.detailAppointmentForm.controls;
-  }
+  // get formModel() {
+  //   // return this.detailAppointmentForm.controls;
+  // }
 
-  public logValues(){
-    console.warn("DETAIL: LogValues() -> Form value: ", this.detailAppointmentForm.value)
-  }
+  // public logValues(){
+  //   console.warn("DETAIL: LogValues() -> Form value: ", this.detailAppointmentForm.value)
+  // }
 
   onSubmit() {
-    this.logValues()
+    // this.logValues()
   }
 
 }

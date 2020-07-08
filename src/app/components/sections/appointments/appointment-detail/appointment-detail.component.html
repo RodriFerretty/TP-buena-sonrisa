@@ -1,6 +1,6 @@
 <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true"> -->
-<div class="modal-dialog" role="document">
+<!-- <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title" id="exampleModalLabel">Turno</h5>
@@ -17,7 +17,7 @@
 
         <div class="form-group">
           <label>Fecha</label>
-          <!-- <input type="text" class="form-control" readonly /> -->
+
           <div class="input-group" disabled>
             <input class="form-control"placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
               (dateSelect)="onDateSelected($event)" #d="ngbDatepicker" disabled>
@@ -34,7 +34,7 @@
             <option value="" disabled selected hidden>Elegir especialidad</option>
             <option *ngFor="let speciality of allSpecialities" [ngValue]="speciality">{{speciality.name}}</option>
           </select>
-          <!-- <small *ngIf="model.role.errors?.required">El rol es requerido</small> -->
+
         </div>
 
         <div class="form-group">
@@ -60,5 +60,5 @@
       </div>
     </form>
   </div>
-</div>
+</div> -->
 <!-- </div> -->

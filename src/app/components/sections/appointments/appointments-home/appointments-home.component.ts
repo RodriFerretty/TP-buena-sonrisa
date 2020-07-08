@@ -28,12 +28,16 @@ export class AppointmentsHomeComponent implements OnInit {
   @ViewChild('content') content: any;
 
   
-  constructor(private userService: UserService, 
+  constructor(public userService: UserService, 
     private appointmentsService: AppointmentsService,
     private specialitiesService: SpecialititesService,
-    private spinner: NgxSpinnerService) { }
+    private spinner: NgxSpinnerService) {
+      console.log("Current user constructor: ", this.userService.currentUser)
+     }
 
   ngOnInit(): void {
+    console.log("Current user onInit: ", this.userService.currentUser)
+
     this.getAllAppointments()
     this.getAllUsers()
     this.getAllSpecialities()
@@ -41,8 +45,8 @@ export class AppointmentsHomeComponent implements OnInit {
 
   onSelect(appointment: Appointment): void {
     this.selectedAppointment = appointment
+    console.log("Current user onSelect: ", this.userService.getCurrentUser())
   }
-
 
   //get all appointments
   getAllAppointments() {
@@ -83,8 +87,18 @@ export class AppointmentsHomeComponent implements OnInit {
     this.destroy$.unsubscribe();
   }
 
-  newAppointment(){
-    //Limpiar el appointment seleccionado para que se muestre limpio el form
+  saveNewAppointment(newAppointment: Appointment){
+    console.log("En saveNewAppointment: -> ", newAppointment)
+    newAppointment.attended = false
+    newAppointment.client = this.userService.getCurrentUser().uid
+    newAppointment.status = "pending"
+    this.spinner.show()
+    this.appointmentsService.create(newAppointment).then((result) => {
 
+    }).finally(() => {
+      this.spinner.hide()
+    }).catch((error) => {
+      window.alert(error.message)
+    })
   } 
 }
