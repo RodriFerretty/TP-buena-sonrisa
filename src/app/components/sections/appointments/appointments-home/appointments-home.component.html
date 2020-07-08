@@ -31,8 +31,8 @@
         <table *ngIf="getValuesForTable()?.length > 0" class="table">
             <thead>
                 <tr>
-                    <th *ngIf="userService.getCurrentUser()?.role == 'specialist'"  scope="col">Cliente</th>
-                    <th scope="col">Especialista</th>
+                    <th *ngIf="userService.getCurrentUser()?.role == 'specialist'" scope="col">Cliente</th>
+                    <th *ngIf="userService.getCurrentUser()?.role == 'client'" scope="col">Especialista</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Hora</th>
                     <th scope="col">Estado</th>
@@ -43,7 +43,7 @@
                     class="row-clickable">
                      <!-- data-toggle="modal" data-target="#detailAppointmentModal"> -->
                     <td *ngIf="userService.getCurrentUser()?.role == 'specialist'" >{{ getClientNameForUid(appointment.client) | titlecase}}</td>
-                    <td>{{ getSpecialistNameForUid(appointment.specialist) | titlecase}}</td>
+                    <td *ngIf="userService.getCurrentUser()?.role == 'client'" >{{ getSpecialistNameForUid(appointment.specialist) | titlecase}}</td>
                     <td>{{ appointment.date.seconds * 1000 | date: 'dd/MM/yyyy'}}</td>
                     <td>{{ appointment.time }}</td>
                     <td>{{ appointment.status | titlecase}}</td>
