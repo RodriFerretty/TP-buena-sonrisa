@@ -22,4 +22,8 @@ export class NavigationBarComponent implements OnInit {
     return this.userService.getCurrentUser().displayName
   }
 
+  public getPhotoURL(): string {
+    return this.userService.getCurrentUser().photoURL
+  }
+
 }

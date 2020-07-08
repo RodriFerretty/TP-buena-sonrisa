@@ -11,9 +11,14 @@
     </ul>
     <ul class="navbar-nav ml-auto">
       <li *ngIf="!isLoggedIn()" class="nav-item"><a class="nav-link" routerLink="session">Session</a></li>
+
       <li *ngIf="isLoggedIn()" class="nav-item">
-        <a href="" class="nav-link">{{getDisplayName()}}</a>
+        <img src="{{getPhotoURL()}}" 
+             width="33" height="33" 
+             class="rounded-circle">
+        <span class="navbar-text ml-2">{{getDisplayName()}}</span>
       </li>
+      
       <li *ngIf="isLoggedIn()" class="nav-item">
         <a href="" class="nav-link" (click)="userService.logoutAsUser()">LogOut</a>
       </li>

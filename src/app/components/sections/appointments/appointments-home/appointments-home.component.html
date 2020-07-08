@@ -28,7 +28,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Cliente</th>
+                    <th *ngIf="userService.getCurrentUser()?.role == 'specialist'"  scope="col">Cliente</th>
                     <th scope="col">Especialista</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Hora</th>
@@ -39,7 +39,7 @@
                 <tr *ngFor="let appointment of getValuesForTable()" (click)="onSelect(appointment)"
                     class="row-clickable">
                      <!-- data-toggle="modal" data-target="#detailAppointmentModal"> -->
-                    <td>{{ getClientNameForUid(appointment.client) | titlecase}}</td>
+                    <td *ngIf="userService.getCurrentUser()?.role == 'specialist'" >{{ getClientNameForUid(appointment.client) | titlecase}}</td>
                     <td>{{ getSpecialistNameForUid(appointment.specialist) | titlecase}}</td>
                     <td>{{ appointment.date.seconds * 1000 | date: 'dd/MM/yyyy'}}</td>
                     <td>{{ appointment.time }}</td>
