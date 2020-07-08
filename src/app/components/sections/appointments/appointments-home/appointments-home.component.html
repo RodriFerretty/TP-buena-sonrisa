@@ -39,10 +39,10 @@
                 <tr *ngFor="let appointment of filteredAppointments" (click)="onSelect(appointment)"
                     class="row-clickable">
                      <!-- data-toggle="modal" data-target="#detailAppointmentModal"> -->
-                    <td>{{ appointment.client | titlecase}}</td>
-                    <td>{{ appointment.specialist | titlecase}}</td>
-                    <td>{{ appointment.date | titlecase}}</td>
-                    <td>{{ appointment.time | titlecase}}</td>
+                    <td>{{ getClientNameForUid(appointment.client) | titlecase}}</td>
+                    <td>{{ getSpecialistNameForUid(appointment.specialist) | titlecase}}</td>
+                    <td>{{ appointment.date.seconds * 1000 | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{ appointment.time }}</td>
                     <td>{{ appointment.status | titlecase}}</td>
                 </tr>
             </tbody>

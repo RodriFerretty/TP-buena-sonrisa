@@ -50,7 +50,7 @@ export class AppointmentsHomeComponent implements OnInit {
 
   //get all appointments
   getAllAppointments() {
-    // this.spinner.show()
+    this.spinner.show()
     //https://itnext.io/3-common-mistakes-when-using-angular-ngrx-firebase-9de4e241d866
     //https://www.digitalocean.com/community/tutorials/angular-takeuntil-rxjs-unsubscribe
     console.log("en getAllAppointments")
@@ -59,6 +59,7 @@ export class AppointmentsHomeComponent implements OnInit {
       console.log(appointments);
       this.allAppointments = appointments
       this.filteredAppointments = appointments
+      this.spinner.hide()
     });
   }
 
@@ -85,6 +86,18 @@ export class AppointmentsHomeComponent implements OnInit {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();
+  }
+
+  /*
+  * Methods to get names and values for table.
+  */
+  getClientNameForUid(uid: string){
+    const user = this.allUsers?.find(x => x.uid == uid)
+    return user?.displayName
+  }
+  getSpecialistNameForUid(uid: string){
+    const user = this.allUsers?.find(x => x.uid == uid)
+    return user?.displayName
   }
 
   saveNewAppointment(newAppointment: Appointment){

@@ -19,9 +19,9 @@ export class AppointmentNewComponent implements OnInit {
   @Output() saveAppointment = new EventEmitter<Appointment>();
 
   public allSchedules: String[] = ["08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45",
-                                   "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45",
-                                   "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45",
-                                   "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45"]
+    "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45",
+    "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45",
+    "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45"]
 
   model: NgbDateStruct;
   date: { year: number, month: number };
@@ -31,22 +31,26 @@ export class AppointmentNewComponent implements OnInit {
   public filteredSchedules: String[]
 
   newAppointmentForm: FormGroup;
-  
+
   /* Constructor */
   constructor(private calendar: NgbCalendar, private ngbCalendarConfig: NgbDatepickerConfig) {
     this.newAppointmentForm = this.createFormGroup();
 
     const current = new Date();
-    ngbCalendarConfig.minDate = { year: current.getFullYear(), 
-                                  month: current.getMonth() + 1, 
-                                  day: current.getDate() };
-    ngbCalendarConfig.maxDate = { year: current.getFullYear(), 
-                                  month: current.getMonth() + 2, 
-                                  day: current.getDate() };
+    ngbCalendarConfig.minDate = {
+      year: current.getFullYear(),
+      month: current.getMonth() + 1,
+      day: current.getDate()
+    };
+    ngbCalendarConfig.maxDate = {
+      year: current.getFullYear(),
+      month: current.getMonth() + 2,
+      day: current.getDate()
+    };
     ngbCalendarConfig.outsideDays = 'hidden';
     ngbCalendarConfig.markDisabled = (date: NgbDate) => calendar.getWeekday(date) >= 6;
   }
-  
+
   /* Class body */
   ngOnInit(): void {
   }
@@ -64,11 +68,11 @@ export class AppointmentNewComponent implements OnInit {
     return this.newAppointmentForm.controls;
   }
 
-  public logValues(){
+  public logValues() {
     console.warn("NEW: LogValues() -> Form value: ", this.newAppointmentForm.value)
   }
 
-  cancelNew(){
+  cancelNew() {
     this.newAppointmentForm.reset()
   }
 
@@ -80,21 +84,21 @@ export class AppointmentNewComponent implements OnInit {
   private emitNewAppointment() {
     var newApp = new Appointment()
     newApp.specialist = this.newAppointmentForm.value.specialist.uid
-    const jsDate = new Date(this.newAppointmentForm.value.date.year, 
-                            this.newAppointmentForm.value.date.month - 1, 
-                            this.newAppointmentForm.value.date.day);
+    const jsDate = new Date(this.newAppointmentForm.value.date.year,
+      this.newAppointmentForm.value.date.month - 1,
+      this.newAppointmentForm.value.date.day);
     console.log("Date en JS: ", jsDate)
-    newApp.date = "010920"
+    newApp.date = jsDate
     newApp.time = this.newAppointmentForm.value.schedule
     console.log("En emitNewAppointment - newApp: ", newApp)
     this.saveAppointment.emit(newApp)
-    
+
   }
 
 
 
   /* Input events */
-  onDateSelected(event: any) { 
+  onDateSelected(event: any) {
     this.filteredSpecialists = this.allUsers.filter(s => s.specialty === this.formModel.speciality.value.uid)
   }
 
@@ -108,7 +112,31 @@ export class AppointmentNewComponent implements OnInit {
      * Filtrar los que sean del especialista seleccionado
      * Por cada uno de los turnos, tomar el horario y quitarlo del array de horarios
      */
-    this.filteredSchedules = this.allSchedules
+    // this.newAppointmentForm.value.specialist.uid
+    const selectedDate = new Date(this.newAppointmentForm.value.date.year,
+      this.newAppointmentForm.value.date.month - 1,
+      this.newAppointmentForm.value.date.day);
+    
+    var allAppointmentsInDateForSpecialist = this.allAppointments.filter(s => {
+      console.log("Appointment Specialist: ", s.specialist)
+      console.log("Form specialist: ", this.formModel.specialist.value)
+      console.log("SelectedDate: ", selectedDate)
+      console.log("Appointment date: ", s.date.toDate())
+      console.log("Date comparison: ", (selectedDate.toDateString() === s.date.toDate().toDateString()))
+
+      return (s.specialist === this.formModel.specialist.value.uid && selectedDate.toDateString() === s.date.toDate().toDateString())
+    })
+
+    console.log("Appointments filtered for that date and specialits: ", allAppointmentsInDateForSpecialist)
+    let timesInDate = allAppointmentsInDateForSpecialist.map(a => a.time);
+
+    var filtered = this.allSchedules.filter(
+      function (e) {
+        return this.indexOf(e) < 0;
+      }, timesInDate);
+    console.log(filtered);
+
+    this.filteredSchedules = filtered
     //this.filteredSchedules = this.allUsers.filter(s => s.specialty === this.formModel.speciality.value.uid)
     console.log("-NEW: onSpecialistSelected -> filtered specialits --> ", this.filteredSpecialists)
   }
