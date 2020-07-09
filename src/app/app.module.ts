@@ -21,6 +21,7 @@ import { CreateAccountComponent } from './components/sections/create-account/cre
 import { AppointmentsHomeComponent } from './components/sections/appointments/appointments-home/appointments-home.component';
 import { AppointmentNewComponent } from './components/sections/appointments/appointment-new/appointment-new.component';
 import { AppointmentDetailComponent } from './components/sections/appointments/appointment-detail/appointment-detail.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { AppointmentDetailComponent } from './components/sections/appointments/a
     NgxSpinnerModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

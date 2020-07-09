@@ -4,6 +4,7 @@ import { NgbCalendar, NgbDateStruct, NgbDatepickerConfig, NgbDate } from '@ng-bo
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/entities/user';
 import { Speciality } from 'src/app/entities/speciality';
+import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-appointment-new',
@@ -33,7 +34,9 @@ export class AppointmentNewComponent implements OnInit {
   newAppointmentForm: FormGroup;
 
   /* Constructor */
-  constructor(private calendar: NgbCalendar, private ngbCalendarConfig: NgbDatepickerConfig) {
+  constructor(private calendar: NgbCalendar, 
+              private ngbCalendarConfig: NgbDatepickerConfig,
+              public datepipe: DatePipe) {
     this.newAppointmentForm = this.createFormGroup();
 
     const current = new Date();
@@ -94,10 +97,10 @@ export class AppointmentNewComponent implements OnInit {
     const jsDate = new Date(this.newAppointmentForm.value.date.year,
       this.newAppointmentForm.value.date.month - 1,
       this.newAppointmentForm.value.date.day);
-    console.log("Date en JS: ", jsDate)
+    // console.log("Date en JS: ", jsDate)
     newApp.date = jsDate
     newApp.time = this.newAppointmentForm.value.schedule
-    console.log("En emitNewAppointment - newApp: ", newApp)
+    // console.log("En emitNewAppointment - newApp: ", newApp)
     this.saveAppointment.emit(newApp)
 
   }
@@ -111,7 +114,7 @@ export class AppointmentNewComponent implements OnInit {
     this.filteredSpecialists = this.allUsers.filter(s => s.specialty === this.formModel.speciality.value.uid)
   }
   onSpecialistSelected() {
-    console.log("-NEW: OnSpecialistSelected --> ", this.newAppointmentForm.value)
+    // console.log("-NEW: OnSpecialistSelected --> ", this.newAppointmentForm.value)
     /**
      * Filtrar todos los turnos de esa fecha.
      * Filtrar los que sean del especialista seleccionado
@@ -122,27 +125,32 @@ export class AppointmentNewComponent implements OnInit {
       this.newAppointmentForm.value.date.month - 1,
       this.newAppointmentForm.value.date.day);
     
-    var allAppointmentsInDateForSpecialist = this.allAppointments.filter(s => {
-      console.log("Appointment Specialist: ", s.specialist)
-      console.log("Form specialist: ", this.formModel.specialist.value)
-      console.log("SelectedDate: ", selectedDate)
-      console.log("Appointment date: ", s.date.toDate())
-      console.log("Date comparison: ", (selectedDate.toDateString() === s.date.toDate().toDateString()))
-
-      return (s.specialist === this.formModel.specialist.value.uid && selectedDate.toDateString() === s.date.toDate().toDateString())
+    var allAppointmentsInDateForSpecialist = this.allAppointments.filter(appointment => {
+      // console.log("Appointment Specialist: ", s.specialist)
+      // console.log("Form specialist: ", this.formModel.specialist.value)
+      // console.log("SelectedDate: ", selectedDate)
+      // console.log("Appointment date: ", s.date.toDate())
+      // console.log("Date comparison: ", (selectedDate.toDateString() === s.date.toDate().toDateString()))
+      // console.log("Appointment antes de sameDate: ", appointment)
+      const appDate = new Date(appointment.date.seconds * 1000)
+      // console.log("Appointment date: ", appDate)
+      // console.log("SelectedDate: ", selectedDate)
+      const sameDate = (selectedDate.toDateString() === appDate.toDateString())
+      // console.log("Samedate: ", sameDate)
+      return ((appointment.specialist === this.formModel.specialist.value.uid) && sameDate)
     })
 
-    console.log("Appointments filtered for that date and specialits: ", allAppointmentsInDateForSpecialist)
+    // console.log("Appointments filtered for that date and specialits: ", allAppointmentsInDateForSpecialist)
     let timesInDate = allAppointmentsInDateForSpecialist.map(a => a.time);
 
     var filtered = this.allSchedules.filter(
       function (e) {
         return this.indexOf(e) < 0;
       }, timesInDate);
-    console.log(filtered);
+    // console.log(filtered);
 
     this.filteredSchedules = filtered
-    console.log("-NEW: onSpecialistSelected -> filtered specialits --> ", this.filteredSpecialists)
+    // console.log("-NEW: onSpecialistSelected -> filtered specialits --> ", this.filteredSpecialists)
   }
 
 
