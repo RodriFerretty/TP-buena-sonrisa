@@ -83,7 +83,10 @@ export class AppointmentDetailComponent implements OnInit {
   }
 
   updateAppointmentReviewAndStatus(){
-
+    this.closeModal.nativeElement.click();
+    const updatedAppointment = this.selectedAppointment
+    updatedAppointment.status = "attended"
+    this.updateAppointment.emit(updatedAppointment)
   }
 
   /***** USER CANCEL APPOINTMENT *****/
