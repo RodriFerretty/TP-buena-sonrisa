@@ -16,12 +16,15 @@ export class AppointmentsService {
     return this.afStore.doc<Appointment>(`appointments/${uid}`).valueChanges();
   }
 
-  public create(product: Appointment) {
-    return this.afStore.collection<Appointment>('appointments').add(Object.assign({}, product))
+  public create(appointment: Appointment) {
+    return this.afStore.collection<Appointment>('appointments').add(Object.assign({}, appointment)).then(createResponse => {
+      appointment.uid = createResponse.id;
+      this.update(appointment);
+    });
   }
 
-  public update(uid: string, product: Appointment) {
-    return this.afStore.doc<Appointment>(`appointments/${uid}`).set(Object.assign({}, product), {merge: true});
+  public update(appointment: Appointment) {
+    return this.afStore.doc<Appointment>(`appointments/${appointment.uid}`).set(Object.assign({}, appointment), {merge: true});
   }
 
   public delete(uid: string) {

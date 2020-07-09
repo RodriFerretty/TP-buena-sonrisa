@@ -73,7 +73,14 @@ export class AppointmentNewComponent implements OnInit {
   }
 
   cancelNew() {
-    this.newAppointmentForm.reset()
+    this.filteredSchedules = []
+    this.filteredSpecialists = []
+    this.newAppointmentForm.patchValue({
+      date: "",
+      speciality: "",
+      specialist: "",
+      schedule: ""
+    });
   }
 
   onSubmit() {
@@ -95,11 +102,9 @@ export class AppointmentNewComponent implements OnInit {
 
   }
 
-
-
   /* Input events */
   onDateSelected(event: any) {
-    this.filteredSpecialists = this.allUsers.filter(s => s.specialty === this.formModel.speciality.value.uid)
+    // this.filteredSpecialists = this.allUsers.filter(s => s.specialty === this.formModel.speciality.value.uid)
   }
 
   onSpecialitySelected() {
@@ -112,7 +117,7 @@ export class AppointmentNewComponent implements OnInit {
      * Filtrar los que sean del especialista seleccionado
      * Por cada uno de los turnos, tomar el horario y quitarlo del array de horarios
      */
-    // this.newAppointmentForm.value.specialist.uid
+
     const selectedDate = new Date(this.newAppointmentForm.value.date.year,
       this.newAppointmentForm.value.date.month - 1,
       this.newAppointmentForm.value.date.day);
@@ -137,7 +142,6 @@ export class AppointmentNewComponent implements OnInit {
     console.log(filtered);
 
     this.filteredSchedules = filtered
-    //this.filteredSchedules = this.allUsers.filter(s => s.specialty === this.formModel.speciality.value.uid)
     console.log("-NEW: onSpecialistSelected -> filtered specialits --> ", this.filteredSpecialists)
   }
 

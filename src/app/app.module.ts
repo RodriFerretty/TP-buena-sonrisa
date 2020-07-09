@@ -19,8 +19,8 @@ import { LoginComponent } from './components/sections/session/login/login.compon
 import { SignUpComponent } from './components/sections/session/sign-up/sign-up.component';
 import { CreateAccountComponent } from './components/sections/create-account/create-account.component';
 import { AppointmentsHomeComponent } from './components/sections/appointments/appointments-home/appointments-home.component';
-import { AppointmentDetailComponent } from './components/sections/appointments/appointment-detail/appointment-detail.component';
 import { AppointmentNewComponent } from './components/sections/appointments/appointment-new/appointment-new.component';
+import { AppointmentDetailComponent } from './components/sections/appointments/appointment-detail/appointment-detail.component';
 
 @NgModule({
   declarations: [

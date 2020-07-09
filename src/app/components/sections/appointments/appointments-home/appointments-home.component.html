@@ -40,13 +40,13 @@
             </thead>
             <tbody>
                 <tr *ngFor="let appointment of getValuesForTable()" (click)="onSelect(appointment)"
-                    class="row-clickable">
-                     <!-- data-toggle="modal" data-target="#detailAppointmentModal"> -->
+                    class="row-clickable"
+                     data-toggle="modal" data-target="#detailAppointmentModal">
                     <td *ngIf="userService.getCurrentUser()?.role == 'specialist'" >{{ getClientNameForUid(appointment.client) | titlecase}}</td>
                     <td *ngIf="userService.getCurrentUser()?.role == 'client'" >{{ getSpecialistNameForUid(appointment.specialist) | titlecase}}</td>
                     <td>{{ appointment.date.seconds * 1000 | date: 'dd/MM/yyyy'}}</td>
                     <td>{{ appointment.time }}</td>
-                    <td>{{ appointment.status | titlecase}}</td>
+                    <td>{{ getStatus(appointment.status) | titlecase}}</td>
                 </tr>
             </tbody>
         </table>
@@ -55,7 +55,10 @@
     <div class="container">
         <div class="modal fade" id="detailAppointmentModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <app-appointment-detail [selectedAppointment]="selectedAppointment" [role]="'asdasdasda'"></app-appointment-detail>
+            <app-appointment-detail [selectedAppointment]="selectedAppointment" 
+                                    [allUsers]="allUsers" 
+                                    [role]="userService.getCurrentUser()?.role"
+                                    (updateAppointment)=updateAppointment($event)></app-appointment-detail>
         </div>
     </div>
 

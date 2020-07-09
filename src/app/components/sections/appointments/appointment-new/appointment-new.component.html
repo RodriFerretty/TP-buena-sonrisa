@@ -24,7 +24,7 @@
   
           <div class="form-group">
             <label for="speciality">Especialidad</label>
-            <select class="form-control" formControlName="speciality" id="exampleFormControlSelect1"
+            <select class="form-control" formControlName="speciality" 
               (change)=onSpecialitySelected()>
               <option value="" disabled selected hidden>Elegir especialidad</option>
               <option *ngFor="let speciality of allSpecialities" [ngValue]="speciality">{{speciality.name}}</option>
@@ -34,7 +34,7 @@
   
           <div class="form-group">
             <label for="specialist">Especialista</label>
-            <select class="form-control" formControlName="specialist" id="exampleFormControlSelect1"
+            <select class="form-control" formControlName="specialist" 
               (change)=onSpecialistSelected()>
               <option value="" disabled selected hidden>Especialista</option>
               <option *ngFor="let specialist of filteredSpecialists" [ngValue]="specialist">{{specialist.displayName}}
@@ -44,7 +44,7 @@
   
           <div class="form-group">
             <label for="schedule">Horario</label>
-            <select class="form-control" formControlName="schedule" id="exampleFormControlSelect1">
+            <select class="form-control" formControlName="schedule" >
               <option value="" disabled selected hidden>Horario</option>
               <option *ngFor="let schedule of filteredSchedules">{{schedule}}</option>
             </select>

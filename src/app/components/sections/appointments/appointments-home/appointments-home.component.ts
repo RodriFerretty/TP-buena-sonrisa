@@ -112,14 +112,38 @@ export class AppointmentsHomeComponent implements OnInit {
     const user = this.allUsers?.find(x => x.uid == uid)
     return user?.displayName
   }
+  getStatus(status:string) {
+    switch (status) {
+      case "active":
+        return "Activo"
+      case "cancelled":
+        return "Cancelado"
+      case "attended":
+        return "Atendido"
+      default:
+        return "- - - -"
+    }
+  }
 
   saveNewAppointment(newAppointment: Appointment){
     console.log("En saveNewAppointment: -> ", newAppointment)
     newAppointment.attended = false
     newAppointment.client = this.userService.getCurrentUser().uid
-    newAppointment.status = "pending"
+    newAppointment.status = "active"
     this.spinner.show()
     this.appointmentsService.create(newAppointment).then((result) => {
+
+    }).finally(() => {
+      this.spinner.hide()
+    }).catch((error) => {
+      window.alert(error.message)
+    })
+  } 
+
+  updateAppointment(updatedAppointment: Appointment){
+    console.log("En updateAppointment: -> ", updatedAppointment)
+    this.spinner.show()
+    this.appointmentsService.update(updatedAppointment).then((result) => {
 
     }).finally(() => {
       this.spinner.hide()
