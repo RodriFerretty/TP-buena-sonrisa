@@ -1,27 +1,25 @@
-# TPBuenaSonrisa
+# TPBuenaSonrisa | 
+https://roles-and-abilities.web.app/home
+(El nombre en la URL es por haber llegado al límite de proyectos en Firebase)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
+- Angular CLI
+- NGBootstrap/Bootstrap (JQuery/popperjs)
+- NGX-Spinner
+- AngularFire
+- Firebase
 
-## Development server
+## Consigna:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Subido a la web/Login/Readme/Estilos/Imágenes
 
-## Code scaffolding
+1- Poder registrarse como usuario con imagen
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+2- Pedir un turno
 
-## Build
+3- Ser atendido por el profesional.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+4- Que el profesional guarde una reseña
 
-## Running unit tests
+5- Que el usuario pueda ver la reseña.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+6- Que el usuario puede cargar la encuesta de satisfacción.
