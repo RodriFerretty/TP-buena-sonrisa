@@ -41,7 +41,7 @@ export class SignUpComponent implements OnInit {
   }
 
   onPictureSelected(event) {
-    console.log(event);
+    // console.log(event);
     this.selectedPicture = <File>event.target.files[0]
     this.signUpForm.controls['picture'].setValue(this.selectedPicture ? this.selectedPicture.name : ''); // <-- Set Value for Validation
   }

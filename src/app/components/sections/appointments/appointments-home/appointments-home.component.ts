@@ -32,11 +32,11 @@ export class AppointmentsHomeComponent implements OnInit {
     private appointmentsService: AppointmentsService,
     private specialitiesService: SpecialititesService,
     private spinner: NgxSpinnerService) {
-      console.log("Current user constructor: ", this.userService.currentUser)
+      // console.log("Current user constructor: ", this.userService.currentUser)
      }
 
   ngOnInit(): void {
-    console.log("Current user onInit: ", this.userService.currentUser)
+    // console.log("Current user onInit: ", this.userService.currentUser)
 
     this.getAllAppointments()
     this.getAllUsers()
@@ -45,7 +45,7 @@ export class AppointmentsHomeComponent implements OnInit {
 
   onSelect(appointment: Appointment): void {
     this.selectedAppointment = appointment
-    console.log("Current user onSelect: ", this.userService.getCurrentUser())
+    // console.log("Current user onSelect: ", this.userService.getCurrentUser())
   }
 
   //get all appointments
@@ -53,10 +53,10 @@ export class AppointmentsHomeComponent implements OnInit {
     this.spinner.show()
     //https://itnext.io/3-common-mistakes-when-using-angular-ngrx-firebase-9de4e241d866
     //https://www.digitalocean.com/community/tutorials/angular-takeuntil-rxjs-unsubscribe
-    console.log("en getAllAppointments")
+    // console.log("en getAllAppointments")
     this.appointmentsService.getAll().pipe(
       takeUntil(this.destroy$)).subscribe(appointments => {
-      console.log(appointments);
+      // console.log(appointments);
       this.allAppointments = appointments
       this.filteredAppointments = appointments
       this.spinner.hide()
@@ -65,19 +65,19 @@ export class AppointmentsHomeComponent implements OnInit {
 
   //get all users in order to map in table the name to appointment client and specialist uid
   getAllUsers() {
-    console.log("en getAllUsers")
+    // console.log("en getAllUsers")
     this.userService.getAll().pipe(
       takeUntil(this.destroy$)).subscribe(users => {
-      console.log("All users on home:", users);
+      // console.log("All users on home:", users);
       this.allUsers = users
     });
   }
 
   getAllSpecialities() {
-    console.log("en getAllSpecialities")
+    // console.log("en getAllSpecialities")
     this.specialitiesService.getAll().pipe(
       takeUntil(this.destroy$)).subscribe(specialities => {
-      console.log("All specialities on home:", specialities);
+      // console.log("All specialities on home:", specialities);
       this.allSpecialities = specialities
     });
   }
@@ -126,7 +126,7 @@ export class AppointmentsHomeComponent implements OnInit {
   }
 
   saveNewAppointment(newAppointment: Appointment){
-    console.log("En saveNewAppointment: -> ", newAppointment)
+    // console.log("En saveNewAppointment: -> ", newAppointment)
     newAppointment.attended = false
     newAppointment.client = this.userService.getCurrentUser().uid
     newAppointment.status = "active"
@@ -141,7 +141,7 @@ export class AppointmentsHomeComponent implements OnInit {
   } 
 
   updateAppointment(updatedAppointment: Appointment){
-    console.log("En updateAppointment: -> ", updatedAppointment)
+    // console.log("En updateAppointment: -> ", updatedAppointment)
     this.spinner.show()
     this.appointmentsService.update(updatedAppointment).then((result) => {
 
