@@ -28,7 +28,7 @@
         <div *ngIf="!getValuesForTable()?.length && userService.getCurrentUser()" class="col text-center">
             <h5 class="text-danger justify-content-center d-block">No hay turnos para el usuario</h5>
         </div>
-        <table *ngIf="getValuesForTable()?.length > 0" class="table">
+        <table *ngIf="getValuesForTable()?.length > 0" class="table table-bordered">
             <thead>
                 <tr>
                     <th *ngIf="userService.getCurrentUser()?.role == 'specialist'" scope="col">Cliente</th>
@@ -40,7 +40,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let appointment of getValuesForTable()" (click)="onSelect(appointment)"
-                    class="row-clickable"
+                    class="row-clickable" [ngClass]="{active:'table-info',attended:'table-success',cancelled:'table-danger'}[appointment.status]"
                      data-toggle="modal" data-target="#detailAppointmentModal">
                     <td *ngIf="userService.getCurrentUser()?.role == 'specialist'" >{{ getClientNameForUid(appointment.client) | titlecase}}</td>
                     <td *ngIf="userService.getCurrentUser()?.role == 'client'" >{{ getSpecialistNameForUid(appointment.specialist) | titlecase}}</td>
