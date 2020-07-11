@@ -72,7 +72,7 @@ export class AppointmentNewComponent implements OnInit {
   }
 
   public logValues() {
-    console.warn("NEW: LogValues() -> Form value: ", this.newAppointmentForm.value)
+    // console.warn("NEW: LogValues() -> Form value: ", this.newAppointmentForm.value)
   }
 
   cancelNew() {

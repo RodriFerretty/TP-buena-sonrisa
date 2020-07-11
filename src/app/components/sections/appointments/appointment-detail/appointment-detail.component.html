@@ -11,14 +11,14 @@
           type="text" class="form-control" id="date-time" disabled>
       </div>
 
-      <!-- <div *ngIf="true">
+      <div *ngIf="this.userRole == 'client'">
         <label for="specialist">Especialista</label>
         <div class="input-group mb-3">
           <input value="{{getUsernameFor(selectedAppointment?.specialist)}}" type="text" class="form-control" id="specialist" disabled>
         </div>
-      </div> -->
+      </div>
 
-      <div *ngIf="false">
+      <div *ngIf="this.userRole == 'specialist'">
         <label for="client">Cliente</label>
         <div class="input-group mb-3">
           <input value="{{getUsernameFor(selectedAppointment?.client)}}" type="text" class="form-control" id="client"
