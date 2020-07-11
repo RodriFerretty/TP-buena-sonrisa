@@ -80,7 +80,7 @@ export class AppointmentDetailComponent implements OnInit {
 
   /***** USER CANCEL APPOINTMENT *****/
   cancelAppointment() {
-    console.log("Cancelado")
+    // console.log("Cancelado")
     this.closeModal.nativeElement.click();
     this.selectedAppointment.status = "cancelled"
     this.updateAppointment.emit(this.selectedAppointment)
