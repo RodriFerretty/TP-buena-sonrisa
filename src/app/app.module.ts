@@ -22,6 +22,7 @@ import { AppointmentsHomeComponent } from './components/sections/appointments/ap
 import { AppointmentNewComponent } from './components/sections/appointments/appointment-new/appointment-new.component';
 import { AppointmentDetailComponent } from './components/sections/appointments/appointment-detail/appointment-detail.component';
 import { DatePipe } from '@angular/common';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { DatePipe } from '@angular/common';
     CreateAccountComponent,
     AppointmentsHomeComponent,
     AppointmentDetailComponent,
-    AppointmentNewComponent
+    AppointmentNewComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

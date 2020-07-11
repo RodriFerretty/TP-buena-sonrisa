@@ -21,7 +21,7 @@ export class AppointmentsHomeComponent implements OnInit {
   public filteredAppointments: Appointment[]
   public allUsers: User[]
   public allSpecialities: Speciality[]
-
+  public selectedDateFilter: Date = null
   public selectedAppointment: Appointment
 
   public textText = "pepe"
@@ -151,4 +151,15 @@ export class AppointmentsHomeComponent implements OnInit {
       window.alert(error.message)
     })
   } 
+
+
+
+  onDateSelected(event: any) {
+    console.log("Event: ", event)
+    const selectedDate = new Date(event.year,
+      event.month - 1,
+      event.day);
+      console.log("Date parsed: ", selectedDate)
+    this.selectedDateFilter = selectedDate
+  }
 }

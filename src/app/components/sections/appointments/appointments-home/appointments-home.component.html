@@ -17,11 +17,17 @@
                     Nuevo turno</button>
         </div>
         <div class="col-sm">
-            <button *ngIf="userService.getCurrentUser()?.role == 'specialist'" 
-                    type="button" class="btn btn-danger">[PDF]</button>
+            <button type="button" class="btn btn-default btn-lg">
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
+            </button>
         </div>
         <div class="col-sm">
-            <!-- Otro botón (Descargar CSV quizá) -->
+            <input class="form-control" placeholder="yyyy-mm-dd" 
+                   name="dp" ngbDatepicker (dateSelect)="onDateSelected($event)"
+                   #d="ngbDatepicker" disabled>
+            <div class="input-group-btn">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></button>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -39,7 +45,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let appointment of getValuesForTable()" (click)="onSelect(appointment)"
+                <tr *ngFor="let appointment of getValuesForTable() | filter : selectedDateFilter" (click)="onSelect(appointment)"
                     class="row-clickable" [ngClass]="{active:'table-info',attended:'table-success',cancelled:'table-danger'}[appointment.status]"
                      data-toggle="modal" data-target="#detailAppointmentModal">
                     <td *ngIf="userService.getCurrentUser()?.role == 'specialist'" >{{ getClientNameForUid(appointment.client) | titlecase}}</td>
