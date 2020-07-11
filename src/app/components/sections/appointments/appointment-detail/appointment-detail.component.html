@@ -49,6 +49,23 @@
               (click)="markAttended()">Marcar como atendido
       </button>
     </div>
+    <div class="modal-footer d-block">
+      <div class="row justify-content-center">
+        <h5>Encuesta</h5>
+      </div>
+      <div>
+      <label>Clinica</label>
+      <div class="input-group mb-2">
+        <ngb-rating [(rate)]="selected" (hover)="hovered=$event" (leave)="hovered=0" [readonly]="readonly"></ngb-rating>
+      </div>
+      <label>Especialista</label>
+      <div class="input-group mb-2">
+        <ngb-rating [(rate)]="selected" (hover)="hovered=$event" (leave)="hovered=0" [readonly]="readonly"></ngb-rating>
+      </div>
+      <label>Breve descripción</label>
+      <div class="input-group mb-3"></div>
+    </div>
+    </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" 
               data-dismiss="modal" #closeModal
