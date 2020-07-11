@@ -11,17 +11,18 @@
           type="text" class="form-control" id="date-time" disabled>
       </div>
 
-      <div *ngIf="true">
+      <!-- <div *ngIf="true">
         <label for="specialist">Especialista</label>
         <div class="input-group mb-3">
           <input value="{{getUsernameFor(selectedAppointment?.specialist)}}" type="text" class="form-control" id="specialist" disabled>
         </div>
-      </div>
+      </div> -->
 
       <div *ngIf="false">
         <label for="client">Cliente</label>
         <div class="input-group mb-3">
-          <input value="{{getUsernameFor(selectedAppointment?.client)}}" type="text" class="form-control" id="client" disabled>
+          <input value="{{getUsernameFor(selectedAppointment?.client)}}" type="text" class="form-control" id="client"
+            disabled>
         </div>
       </div>
 
@@ -30,24 +31,30 @@
         <input value="{{getStatus()}}" type="text" class="form-control" id="status" disabled>
       </div>
 
-      <!-- Muestro para editar la reseña si está activo -->
-      <label for="specialist-review">Reseña del especialista</label>
-      <div class="input-group mb-3">
-        <textarea class="form-control" aria-label="With textarea" [disabled]="disableSpecialistReview()">{{getSpecialistReview()}}</textarea>
+      <!-- Muestro para editar la reseña si -->
+      <div *ngIf="selectedAppointment?.specialistReview || markedAsAttended">
+        <label for="specialist-review">Reseña del especialista</label>
+        <div class="input-group mb-3">
+          <textarea class="form-control" aria-label="With textarea" 
+                    [(ngModel)]="selectedAppointment.specialistReview"
+                    [disabled]="disableSpecialistReview()">
+          </textarea>
+        </div>
       </div>
 
     </div>
     <div *ngIf="canCancelAppointment() || canMarkAsAttended()" class="modal-footer">
-      <button *ngIf="canCancelAppointment()" 
+      <!-- <button *ngIf="canCancelAppointment()" 
               type="button" class="btn btn-danger" 
-              (click)="cancelAppointment()">Cancelar turno</button>
-      <button *ngIf="canMarkAsAttended()" 
-              type="button" class="btn btn-success" 
-              (click)="markAttended()">Marcar como atendido</button>
+              (click)="cancelAppointment()">Cancelar turno</button> -->
+      <button *ngIf="canMarkAsAttended()" type="button" 
+              class="btn btn-success" (click)="markAttended()">Marcar como atendido</button>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeModal (click)="closeModalForm()" >Cerrar</button>
-      <button type="button" class="btn btn-primary" (click)="updateAppointmentReviewAndStatus()" [disabled]=!markedAsAttended>Guardar cambios</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeModal
+        (click)="closeModalForm()">Cerrar</button>
+      <button type="button" class="btn btn-primary" (click)="updateAppointmentReviewAndStatus()"
+        [disabled]=!markedAsAttended>Guardar cambios</button>
     </div>
   </div>
 </div>

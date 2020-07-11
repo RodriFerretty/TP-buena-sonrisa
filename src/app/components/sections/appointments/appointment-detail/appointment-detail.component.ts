@@ -47,23 +47,12 @@ export class AppointmentDetailComponent implements OnInit {
   }
 
   disableSpecialistReview() {
-    if (this.userRole == "client") {
-      return true
-    }
+    if (this.userRole == "client") { return true }
 
     if (this.userRole == "specialist") {
-      if (this.selectedAppointment?.specialistReview || !this.markedAsAttended) {
-        return true
-      }
+      return !this.markedAsAttended
     }
     return false
-  }
-
-  getSpecialistReview() {
-    if (this.userRole == "client" && !this.selectedAppointment?.specialistReview) {
-      return "Acá vas a ver la reseña del especialista."
-    }
-    return this.selectedAppointment?.specialistReview
   }
 
   canCancelAppointment() {
@@ -82,11 +71,11 @@ export class AppointmentDetailComponent implements OnInit {
     this.markedAsAttended = false
   }
 
+  /****** SPECIALIST MARK AS ATTENDED ******/
   updateAppointmentReviewAndStatus(){
     this.closeModal.nativeElement.click();
-    const updatedAppointment = this.selectedAppointment
-    updatedAppointment.status = "attended"
-    this.updateAppointment.emit(updatedAppointment)
+    this.selectedAppointment.status = "attended"
+    this.updateAppointment.emit(this.selectedAppointment)
   }
 
   /***** USER CANCEL APPOINTMENT *****/

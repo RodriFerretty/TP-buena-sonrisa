@@ -44,7 +44,7 @@ export class AppointmentsHomeComponent implements OnInit {
   }
 
   onSelect(appointment: Appointment): void {
-    this.selectedAppointment = appointment
+    this.selectedAppointment = Object.assign({}, appointment)
     // console.log("Current user onSelect: ", this.userService.getCurrentUser())
   }
 
@@ -53,10 +53,10 @@ export class AppointmentsHomeComponent implements OnInit {
     this.spinner.show()
     //https://itnext.io/3-common-mistakes-when-using-angular-ngrx-firebase-9de4e241d866
     //https://www.digitalocean.com/community/tutorials/angular-takeuntil-rxjs-unsubscribe
-    // console.log("en getAllAppointments")
+    console.log("en getAllAppointments")
     this.appointmentsService.getAll().pipe(
       takeUntil(this.destroy$)).subscribe(appointments => {
-      // console.log(appointments);
+      console.log(appointments);
       this.allAppointments = appointments
       this.filteredAppointments = appointments
       this.spinner.hide()
