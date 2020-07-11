@@ -43,18 +43,26 @@
       </div>
 
     </div>
-    <div *ngIf="canCancelAppointment() || canMarkAsAttended()" class="modal-footer">
-      <!-- <button *ngIf="canCancelAppointment()" 
-              type="button" class="btn btn-danger" 
-              (click)="cancelAppointment()">Cancelar turno</button> -->
+    <div *ngIf="canMarkAsAttended()" class="modal-footer">
       <button *ngIf="canMarkAsAttended()" type="button" 
-              class="btn btn-success" (click)="markAttended()">Marcar como atendido</button>
+              class="btn btn-success" 
+              (click)="markAttended()">Marcar como atendido
+      </button>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeModal
-        (click)="closeModalForm()">Cerrar</button>
-      <button type="button" class="btn btn-primary" (click)="updateAppointmentReviewAndStatus()"
-        [disabled]=!markedAsAttended>Guardar cambios</button>
+      <button type="button" class="btn btn-secondary" 
+              data-dismiss="modal" #closeModal
+              (click)="closeModalForm()">Cerrar
+      </button>
+      <button *ngIf="this.userRole == 'specialist' && markedAsAttended" 
+              type="button" class="btn btn-primary" 
+              (click)="updateAppointmentReviewAndStatus()"
+              [disabled]=!markedAsAttended>Guardar cambios
+      </button>
+      <button *ngIf="canCancelAppointment()" 
+              type="button" class="btn btn-danger" 
+              (click)="cancelAppointment()">Cancelar turno
+      </button>
     </div>
   </div>
 </div>
