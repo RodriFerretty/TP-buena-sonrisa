@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import { User } from 'src/app/entities/user';
 import { SpecialititesService } from 'src/app/services/specialitites.service';
 import { Speciality } from 'src/app/entities/speciality';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-appointments-home',
@@ -23,7 +24,7 @@ export class AppointmentsHomeComponent implements OnInit {
   public allSpecialities: Speciality[]
   public selectedDateFilter: Date = null
   public selectedAppointment: Appointment
-
+  filterModel: NgbDateStruct;
   public textText = "pepe"
   @ViewChild('content') content: any;
 
@@ -162,4 +163,9 @@ export class AppointmentsHomeComponent implements OnInit {
       console.log("Date parsed: ", selectedDate)
     this.selectedDateFilter = selectedDate
   }
+
+  cleanDateFilter() {
+    this.selectedDateFilter = this.filterModel = null
+  }
+
 }

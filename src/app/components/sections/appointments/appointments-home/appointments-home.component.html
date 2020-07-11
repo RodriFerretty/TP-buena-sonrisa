@@ -11,22 +11,27 @@
         </div> -->
     <!-- </div> -->
     <div class="row mb-2">
-        <div class="col-sm">
-            <button *ngIf="userService.getCurrentUser()?.role == 'client'" type="button" class="btn btn-success" 
-                    data-toggle="modal" data-target="#newAppointmentModal">
+        <div *ngIf="userService.getCurrentUser()?.role == 'client'" class="col-sm">
+            <div class="input-group mb-3">
+                <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#newAppointmentModal">
                     Nuevo turno</button>
+            </div>
         </div>
-        <div class="col-sm">
-            <button type="button" class="btn btn-default btn-lg">
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
-            </button>
-        </div>
-        <div class="col-sm">
-            <input class="form-control" placeholder="yyyy-mm-dd" 
-                   name="dp" ngbDatepicker (dateSelect)="onDateSelected($event)"
-                   #d="ngbDatepicker" disabled>
-            <div class="input-group-btn">
-                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></button>
+        <div *ngIf="userService.getCurrentUser()?.role == 'specialist'" class="col-sm">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button class="btn btn-warning" [disabled]="selectedDateFilter == null" (click)="cleanDateFilter()">
+                        <span><i class="fas fa-broom"></i>Limpiar</span>
+                    </button>
+                </div>
+                <input class="form-control" placeholder="AAAA-MM-DD" name="dp" [(ngModel)]="filterModel" ngbDatepicker
+                    (dateSelect)="onDateSelected($event)" #d="ngbDatepicker"[minDate]="{year: 2010, month: 1, day: 1}"
+                    [maxDate]="{year: 2048, month: 12, day: 31}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
+                        <i class="far fa-calendar-alt"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
