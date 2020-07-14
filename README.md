@@ -1,12 +1,19 @@
-# TPBuenaSonrisa | 
-https://roles-and-abilities.web.app/home
-(El nombre en la URL es por haber llegado al límite de proyectos en Firebase)
+# TPBuenaSonrisa | https://roles-and-abilities.web.app/home
+#### Consideraciones:
+- (El nombre en la URL es por haber llegado al límite de proyectos en Firebase)
+- Hay un error en la consola del navegador: 
+```
+'ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked.' 
+```
+Este error ocurre en el bindeo del componente ngb-rating y no llegué a solucionarlo. Elegí dejarlo hasta que pueda arreglarlo porque no quita funcionalidad, y en caso de haber decidido sacarlo hubiera implicado prescindir de la funcionalidad de carga de encuesta (y lectura) por parte del usuario.
 
+-----
 - Angular CLI
 - NGBootstrap/Bootstrap (JQuery/popperjs)
 - NGX-Spinner
 - AngularFire
 - Firebase
+- StackOverflow, por supuesto.
 
 ## Consigna:
 
@@ -46,6 +53,11 @@ Cliente 1 | Cliente 2
 Cliente 3 | Cliente 4
 ------------ | -------------
 ![Client3](https://i.ibb.co/bBG6Twq/cliente3.png) | ![Cliente4](https://i.ibb.co/kcdFr6v/cliente4.png)
+
+Cliente 5 | Cliente 6
+------------ | -------------
+![Client5](https://i.ibb.co/m0MHfwB/Image.png) | ![Cliente6](https://i.ibb.co/N2KKkGj/Image.png)
+
 
 
 
