@@ -23,8 +23,11 @@ export class AppointmentDetailComponent implements OnInit {
   specialistReviewForm = ""
   
   /* USER RATING */
-  selected = 0;
-  hovered = 0;
+  rateClinic = 1;
+  hoveredClinic = 0;
+  rateSpecialist = 1;
+  hoveredSpecialist = 0;
+  clientReview = ""
   readonly = false;
   
   /* Constructor */
@@ -68,8 +71,8 @@ export class AppointmentDetailComponent implements OnInit {
     return (this.userRole == "specialist" && this.selectedAppointment?.status == 'active' && !this.markedAsAttended)
   }
 
-  canCancelFillPoll() {
-    return (this.userRole == "client" && this.selectedAppointment?.status == 'active')
+  canFillPoll() {
+    return (this.userRole == "client" && this.selectedAppointment?.status == 'attended')
   }
 
   markAttended(){
