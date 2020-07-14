@@ -80,7 +80,6 @@ export class AppointmentDetailComponent implements OnInit {
 
   hasSurvey(): boolean {
     const survey = this.allSurveys?.find(x => x.appointmentId == this.selectedAppointment?.uid)
-    console.log("Survey inside hasSurvey: ", survey)
     if (survey) {
       this.rateClinic = survey.clinicRate;
       this.rateSpecialist = survey.specialistRate;
@@ -114,7 +113,7 @@ export class AppointmentDetailComponent implements OnInit {
 
   /***** USER LOAD APPOINTMENT SURVEY *****/
   saveAppointmentSurvey(){
-    console.log("rateClinic: ", this.rateClinic)
+    // console.log("rateClinic: ", this.rateClinic)
 
     const appointmentId = this.selectedAppointment.uid
     var newSurvey = new Survey()
@@ -123,7 +122,7 @@ export class AppointmentDetailComponent implements OnInit {
     newSurvey.specialistRate = this.rateSpecialist
     newSurvey.userSurveyReview = this.clientReview
 
-    console.log("newSurvey en modal:", newSurvey)
+    // console.log("newSurvey en modal:", newSurvey)
     this.saveSurvey.emit(Object.assign({}, newSurvey))
     this.closeModal.nativeElement.click();
   }
@@ -137,7 +136,7 @@ export class AppointmentDetailComponent implements OnInit {
 
   /***** USER CANCEL APPOINTMENT *****/
   cancelAppointment() {
-    console.log("Cancelado")
+    // console.log("Cancelado")
     this.closeModal.nativeElement.click();
     this.selectedAppointment.status = "cancelled"
     this.updateAppointment.emit(this.selectedAppointment)

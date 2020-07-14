@@ -59,10 +59,10 @@ export class AppointmentsHomeComponent implements OnInit {
     this.spinner.show()
     //https://itnext.io/3-common-mistakes-when-using-angular-ngrx-firebase-9de4e241d866
     //https://www.digitalocean.com/community/tutorials/angular-takeuntil-rxjs-unsubscribe
-    console.log("en getAllAppointments")
+    // console.log("en getAllAppointments")
     this.appointmentsService.getAll().pipe(
       takeUntil(this.destroy$)).subscribe(appointments => {
-      console.log(appointments);
+      // console.log(appointments);
       this.allAppointments = appointments
       this.filteredAppointments = appointments
       this.spinner.hide()
@@ -169,7 +169,7 @@ export class AppointmentsHomeComponent implements OnInit {
 
   saveSurvey(newSurvey: Survey) {
     this.spinner.show()
-    console.log("Nueva survey: ", newSurvey)
+    // console.log("Nueva survey: ", newSurvey)
     this.surveysService.create(newSurvey).then((result) => {
     }).finally(() => {
       this.spinner.hide()
@@ -180,11 +180,11 @@ export class AppointmentsHomeComponent implements OnInit {
 
 
   onDateSelected(event: any) {
-    console.log("Event: ", event)
+    // console.log("Event: ", event)
     const selectedDate = new Date(event.year,
       event.month - 1,
       event.day);
-      console.log("Date parsed: ", selectedDate)
+      // console.log("Date parsed: ", selectedDate)
     this.selectedDateFilter = selectedDate
   }
 
