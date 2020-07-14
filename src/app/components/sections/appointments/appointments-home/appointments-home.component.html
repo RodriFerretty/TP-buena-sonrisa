@@ -67,7 +67,8 @@
         <div class="modal fade" id="detailAppointmentModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <app-appointment-detail [selectedAppointment]="selectedAppointment" 
-                                    [allUsers]="allUsers" 
+                                    [allUsers]="allUsers"
+                                    [allSurveys]="allSurveys" 
                                     [role]="userService.getCurrentUser()?.role"
                                     (updateAppointment)=updateAppointment($event)
                                     (saveSurvey)=saveSurvey($event)></app-appointment-detail>

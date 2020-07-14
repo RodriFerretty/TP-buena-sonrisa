@@ -15,6 +15,7 @@ import { ViewChild, ElementRef } from '@angular/core';
 export class AppointmentDetailComponent implements OnInit {
   @Input() selectedAppointment: Appointment;
   @Input() allUsers: User[];
+  @Input() allSurveys: Survey[];
   @Input('role') userRole: string;
   @Output() updateAppointment = new EventEmitter<Appointment>();
   @Output() saveSurvey = new EventEmitter<Survey>();
@@ -75,6 +76,26 @@ export class AppointmentDetailComponent implements OnInit {
 
   canFillPoll() {
     return (this.userRole == "client" && this.selectedAppointment?.status == 'attended')
+  }
+
+  hasSurvey(): boolean {
+    const survey = this.allSurveys?.find(x => x.appointmentId == this.selectedAppointment?.uid)
+    console.log("Survey inside hasSurvey: ", survey)
+    if (survey) {
+      this.rateClinic = survey.clinicRate;
+      this.rateSpecialist = survey.specialistRate;
+      this.clientReview = survey.userSurveyReview
+      return true
+    } else {
+      this.rateClinic = 0;
+      this.rateSpecialist = 0;
+      this.clientReview = "";
+      return false
+    }
+  }
+
+  getSurveyButtonTitle() {
+    return (this.hasSurvey()) ?  "Ver encuesta" :  "Cargar encuesta"
   }
 
   markAttended(){

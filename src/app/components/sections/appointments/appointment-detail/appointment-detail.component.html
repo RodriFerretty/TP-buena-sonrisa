@@ -49,38 +49,46 @@
               (click)="markAttended()">Marcar como atendido
       </button>
     </div>
-    <div class="modal-footer d-block">
-      <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Cargar encuesta
-      </button>
-      <div class="collapse" id="collapseExample">
+    <div *ngIf="canFillPoll()" class="modal-footer d-block">
+      <!-- <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            {{getSurveyButtonTitle()}}
+          </button> -->
+      <!-- <div class="collapse" id="collapseExample"> -->
+      <div class="card">
+        <div class="card-header text-center">
+          Encuesta
+        </div>
+    
         <div class="card card-body">
           <div>
             <label>Clinica</label>
             <div class="input-group mb-2">
-              <ngb-rating [(rate)]="rateClinic" (hover)="hoveredClinic=$event" (leave)="hoveredClinic=0" [readonly]="readonly">
+              <ngb-rating [(rate)]="rateClinic" (hover)="hoveredClinic=$event" (leave)="hoveredClinic=0"
+                [readonly]="hasSurvey()">
               </ngb-rating>
               <small class="form-text text-muted ml-3">{{rateClinic}}/10</small>
             </div>
             <label>Especialista</label>
             <div class="input-group mb-2">
-              <ngb-rating [(rate)]="rateSpecialist" (hover)="hoveredSpecialist=$event" (leave)="hoveredSpecialist=0" [readonly]="readonly">
+              <ngb-rating [(rate)]="rateSpecialist" (hover)="hoveredSpecialist=$event" (leave)="hoveredSpecialist=0"
+                [readonly]="hasSurvey()">
               </ngb-rating>
               <small class="form-text text-muted ml-3">{{rateSpecialist}}/10</small>
             </div>
             <label>Breve descripción</label>
             <div class="input-group mb-1">
-              <textarea class="form-control" aria-label="With textarea" 
-                    [(ngModel)]="clientReview"
-                    maxlength="66"
-                    [disabled]="false">
-              </textarea>
+              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="clientReview" maxlength="66"
+                [disabled]="hasSurvey()">
+                  </textarea>
             </div>
-            <small class="form-text text-muted mb-2">{{66-clientReview.length}} caracteres restantes.</small>
-            <button type="button" class="btn btn-success" (click)="saveAppointmentSurvey()">Guardar encuesta</button>
+            <small *ngIf="!hasSurvey()" class="form-text text-muted mb-2">{{66-clientReview.length}} caracteres
+              restantes.</small>
+            <button *ngIf="!hasSurvey()" type="button" class="btn btn-success" (click)="saveAppointmentSurvey()">Guardar
+              encuesta</button>
           </div>
         </div>
       </div>
+      <!-- </div> -->
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" 

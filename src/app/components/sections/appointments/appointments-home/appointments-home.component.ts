@@ -10,6 +10,7 @@ import { SpecialititesService } from 'src/app/services/specialitites.service';
 import { Speciality } from 'src/app/entities/speciality';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Survey } from 'src/app/entities/survey';
+import { SurveysService } from 'src/app/services/surveys.service';
 
 @Component({
   selector: 'app-appointments-home',
@@ -23,6 +24,7 @@ export class AppointmentsHomeComponent implements OnInit {
   public filteredAppointments: Appointment[]
   public allUsers: User[]
   public allSpecialities: Speciality[]
+  public allSurveys: Survey[]
   public selectedDateFilter: Date = null
   public selectedAppointment: Appointment
   filterModel: NgbDateStruct;
@@ -33,6 +35,7 @@ export class AppointmentsHomeComponent implements OnInit {
   constructor(public userService: UserService, 
     private appointmentsService: AppointmentsService,
     private specialitiesService: SpecialititesService,
+    private surveysService: SurveysService,
     private spinner: NgxSpinnerService) {
       // console.log("Current user constructor: ", this.userService.currentUser)
      }
@@ -43,6 +46,7 @@ export class AppointmentsHomeComponent implements OnInit {
     this.getAllAppointments()
     this.getAllUsers()
     this.getAllSpecialities()
+    this.getAllSurveys()
   }
 
   onSelect(appointment: Appointment): void {
@@ -81,6 +85,15 @@ export class AppointmentsHomeComponent implements OnInit {
       takeUntil(this.destroy$)).subscribe(specialities => {
       // console.log("All specialities on home:", specialities);
       this.allSpecialities = specialities
+    });
+  }
+
+  getAllSurveys() {
+    // console.log("en getAllSpecialities")
+    this.surveysService.getAll().pipe(
+      takeUntil(this.destroy$)).subscribe(surveys => {
+      // console.log("All specialities on home:", specialities);
+      this.allSurveys = surveys
     });
   }
 
@@ -155,15 +168,14 @@ export class AppointmentsHomeComponent implements OnInit {
   } 
 
   saveSurvey(newSurvey: Survey) {
-    // this.spinner.show()
+    this.spinner.show()
     console.log("Nueva survey: ", newSurvey)
-    // this.appointmentsService.update(updatedAppointment).then((result) => {
-
-    // }).finally(() => {
-    //   this.spinner.hide()
-    // }).catch((error) => {
-    //   window.alert(error.message)
-    // })
+    this.surveysService.create(newSurvey).then((result) => {
+    }).finally(() => {
+      this.spinner.hide()
+    }).catch((error) => {
+      window.alert(error.message)
+    })
   }
 
 
