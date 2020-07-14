@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Appointment } from 'src/app/entities/appointment';
+import { Survey } from 'src/app/entities/survey';
 import { NgbCalendar, NgbDateStruct, NgbDatepickerConfig, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/entities/user';
@@ -16,6 +17,7 @@ export class AppointmentDetailComponent implements OnInit {
   @Input() allUsers: User[];
   @Input('role') userRole: string;
   @Output() updateAppointment = new EventEmitter<Appointment>();
+  @Output() saveSurvey = new EventEmitter<Survey>();
 
   @ViewChild('closeModal') closeModal: ElementRef;
   // detailAppointmentForm: FormGroup;
@@ -81,6 +83,28 @@ export class AppointmentDetailComponent implements OnInit {
 
   closeModalForm() {
     this.markedAsAttended = false
+    this.rateClinic = 1;
+    this.hoveredClinic = 0;
+    this.rateSpecialist = 1;
+    this.hoveredSpecialist = 0;
+    this.clientReview = ""
+    this.readonly = false;
+  }
+
+  /***** USER LOAD APPOINTMENT SURVEY *****/
+  saveAppointmentSurvey(){
+    console.log("rateClinic: ", this.rateClinic)
+
+    const appointmentId = this.selectedAppointment.uid
+    var newSurvey = new Survey()
+    newSurvey.appointmentId = appointmentId
+    newSurvey.clinicRate = this.rateClinic
+    newSurvey.specialistRate = this.rateSpecialist
+    newSurvey.userSurveyReview = this.clientReview
+
+    console.log("newSurvey en modal:", newSurvey)
+    this.saveSurvey.emit(Object.assign({}, newSurvey))
+    this.closeModal.nativeElement.click();
   }
 
   /****** SPECIALIST MARK AS ATTENDED ******/

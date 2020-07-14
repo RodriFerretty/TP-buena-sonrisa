@@ -69,7 +69,8 @@
             <app-appointment-detail [selectedAppointment]="selectedAppointment" 
                                     [allUsers]="allUsers" 
                                     [role]="userService.getCurrentUser()?.role"
-                                    (updateAppointment)=updateAppointment($event)></app-appointment-detail>
+                                    (updateAppointment)=updateAppointment($event)
+                                    (saveSurvey)=saveSurvey($event)></app-appointment-detail>
         </div>
     </div>
 

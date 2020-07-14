@@ -9,6 +9,7 @@ import { User } from 'src/app/entities/user';
 import { SpecialititesService } from 'src/app/services/specialitites.service';
 import { Speciality } from 'src/app/entities/speciality';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Survey } from 'src/app/entities/survey';
 
 @Component({
   selector: 'app-appointments-home',
@@ -153,6 +154,17 @@ export class AppointmentsHomeComponent implements OnInit {
     })
   } 
 
+  saveSurvey(newSurvey: Survey) {
+    // this.spinner.show()
+    console.log("Nueva survey: ", newSurvey)
+    // this.appointmentsService.update(updatedAppointment).then((result) => {
+
+    // }).finally(() => {
+    //   this.spinner.hide()
+    // }).catch((error) => {
+    //   window.alert(error.message)
+    // })
+  }
 
 
   onDateSelected(event: any) {
